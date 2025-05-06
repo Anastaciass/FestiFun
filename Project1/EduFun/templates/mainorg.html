@@ -1,91 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Main page (Org)</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link
-    rel="stylesheet"
-    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    crossorigin=""
-  />
-  <style>
-    html, body, #map {
-      height: 90%;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      background-color: black;
-    }
-
-    p.search {
-    color: black;
-    background-color: #BE58CF;
-    border-radius: 20px;
-    padding: 15px;
-    margin: 10px;
-    font-family: Arial, Helvetica, sans-serif;
-    }
-
-    p.add {
-    color: black;
-    background-color: #BE58CF;
-    border-radius: 10px;
-    padding: 15px;
-    margin: 10px;
-    font-family: Arial, Helvetica, sans-serif;
-    }
-
-    p.list {
-    color: black;
-    background-color: #BE58CF;
-    border-radius: 20px;
-    padding: 15px;
-    margin: 10px;
-    font-family: Arial, Helvetica, sans-serif;
-    }
-
-    p.settings {
-    color: black;
-    background-color: #BE58CF;
-    border-radius: 20px;
-    padding: 15px;
-    margin: 10px;
-    font-family: Arial, Helvetica, sans-serif;
-    }
-
-    div.flexbox {
-      display: flex;
-      flex-direction: row;
-      gap: 93px;
-    }
-  </style>
-  
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Map</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/mainorg.css') }}">
 </head>
 <body>
 
-  <div class="flexbox">
-  <p class="add">+</p>
+    <div class="top-bar">
+        <button id="addPinBtn">+</button>
+        <button id="peopleListBtn" onclick="location.href='{{ url_for('guestlist') }}'">LIST OF PEOPLE</button>
+    </div>
 
-  <p class="list">List of people</p>
+    <div id="map"></div>
 
-  <p class="settings">Settings</p>
-  </div>
+    <!-- Search -->
+    <div class="search-bar">
+        <input type="text" placeholder="Search...">
+    </div>
 
+    <!-- Modal -->
+    <div id="eventModal" class="modal hidden">
+        <form class="modal-content">
+            <label>PLACE</label>
+            <input type="text" name="place">
 
-  <div id="map"></div>
-  <script
-    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-    crossorigin=""
-  ></script>
+            <label>DATE</label>
+            <input type="date" name="date">
 
-  <script src="script.js"></script>
+            <label>WEBPAGE</label>
+            <input type="url" name="webpage">
 
-  <p class="search">Search</p>
+            <label>DESCRIPTION</label>
+            <textarea name="description" rows="4"></textarea>
 
+            <button type="submit">SAVE</button>
+        </form>
+    </div>
 
+    <!-- Scripts -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
-
