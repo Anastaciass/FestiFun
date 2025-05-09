@@ -84,15 +84,18 @@ body, html {
 }
 
 .modal-content {
-    background:#000000;
+    background: #000000;
     padding: 20px;
-    border-radius: 12px;
-    width: 90%;
-    max-width: 400px;
+    border-radius: 16px;
+    width: 80%;
+    max-width: 350px;
+    max-height: 90vh;
+    overflow-y: auto;
     color: #BE58CF;
     display: flex;
     flex-direction: column;
     gap: 10px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.7);
 }
 
 .modal-content input,
@@ -136,6 +139,23 @@ body, html {
     color: #656565; /* placeholder как в Figma */
     font-size: 14px;
 }
+.custom-file-upload {
+    display: inline-block;
+    background: #BE58CF;
+    color: white;
+    padding: 10px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: center;
+    transition: background 0.2s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.custom-file-upload:hover {
+    background: #9e3cb3;
+}
+
 
 
 

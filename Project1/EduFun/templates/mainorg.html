@@ -23,7 +23,7 @@
 
     <!-- Modal -->
     <div id="eventModal" class="modal hidden">
-        <form class="modal-content">
+        <form class="modal-content" id="eventForm" enctype="multipart/form-data">
             <label>PLACE</label>
             <input type="text" name="place">
 
@@ -35,6 +35,17 @@
 
             <label>DESCRIPTION</label>
             <textarea name="description" rows="4"></textarea>
+
+            <label>TOPIC</label>
+            <input type="text" name="topic">
+
+            <label>PRICE</label>
+            <input type="number" name="price" step="0.01">
+
+            <label for="image-upload" class="custom-file-upload">CHOOSE IMAGE</label>
+            <input id="image-upload" type="file" name="image" accept="image/*" style="display: none;">
+
+
 
             <button type="submit">SAVE</button>
         </form>
