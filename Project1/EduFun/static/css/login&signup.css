@@ -1,0 +1,29 @@
+body {
+    background-color: #121212;
+    color: #EDEDED;
+}
+.form-label {
+    color: #D1C4E9;
+}
+.btn-outline-dark {
+    border-color: #673AB7;
+    color: #673AB7;
+}
+.btn-outline-dark:hover {
+    background-color: #673AB7;
+    color: #EDEDED;
+}
+.form-control {
+    background-color: #1E1E1E;
+    color: #EDEDED;
+    border-color: #673AB7;
+}
+.form-control:focus {
+    border-color: #9575CD;
+    box-shadow: 0 0 0 0.2rem rgba(103, 58, 183, 0.25);
+}
+.title {
+    color: #9575CD;
+    text-align: center;
+    margin-bottom: 30px;
+}
