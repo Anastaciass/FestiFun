@@ -62,6 +62,10 @@ def get_events():
 
 @app.route('/')
 def home():
+    return render_template('mainuser.html')
+
+@app.route('/organizer')
+def organizer():
     return render_template('mainorg.html')
 
 @app.route('/guestlist')
@@ -83,6 +87,7 @@ def mainuser():
 @app.route('/settings')
 def settings():
     return render_template('settings.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True)
