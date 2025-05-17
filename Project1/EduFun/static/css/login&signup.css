@@ -1,29 +1,123 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
-    background-color: #121212;
-    color: #EDEDED;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  min-height: 100vh;
 }
-.form-label {
-    color: #D1C4E9;
+
+.full-wrapper {
+  width: 100%;
+  max-width: 400px;
+  background-color: #000;
 }
-.btn-outline-dark {
-    border-color: #673AB7;
-    color: #673AB7;
+
+.top-section {
+  background: linear-gradient(to bottom, #d582f7, #9d4edd);
+  padding: 60px 0 40px;
+  border-bottom-left-radius: 40px;
+  border-bottom-right-radius: 40px;
 }
-.btn-outline-dark:hover {
-    background-color: #673AB7;
-    color: #EDEDED;
-}
-.form-control {
-    background-color: #1E1E1E;
-    color: #EDEDED;
-    border-color: #673AB7;
-}
-.form-control:focus {
-    border-color: #9575CD;
-    box-shadow: 0 0 0 0.2rem rgba(103, 58, 183, 0.25);
-}
+
 .title {
-    color: #9575CD;
-    text-align: center;
-    margin-bottom: 30px;
+  text-align: center;
+  font-size: 38px;
+  font-weight: 900;
+  color: white;
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+  margin: 0;
+}
+
+.form-container {
+  padding: 30px 24px 40px;
+}
+
+.form-title {
+  font-size: 20px;
+  color: white;
+  text-align: center;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+
+.form-subtitle {
+  font-size: 13px;
+  color: #c08be5;
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.form-group {
+  margin-bottom: 14px;
+}
+
+.form-control {
+  width: 100%;
+  background-color: #111;
+  border: none;
+  border-radius: 12px;
+  color: white;
+  padding: 14px 16px;
+  font-size: 14px;
+}
+
+.form-control::placeholder {
+  color: #888;
+  text-transform: uppercase;
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+
+.btn {
+  border-radius: 12px;
+  padding: 14px;
+  font-weight: bold;
+  font-size: 15px;
+  width: 100%;
+  text-align: center;
+}
+
+.btn-outline-dark {
+  background-color: #d582f7;
+  color: white;
+  border: none;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+}
+
+.btn-outline-dark:hover {
+  background-color: #b14ee2;
+  color: white;
+}
+
+.button-column {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 20px;
+}
+
+.btn-gradient {
+  width: 100%;
+  border-radius: 12px;
+  padding: 14px;
+  font-weight: bold;
+  font-size: 15px;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  background: linear-gradient(to bottom, #d582f7, #9d4edd);
+  border: none;
+  transition: opacity 0.3s ease;
+}
+
+.btn-gradient:hover {
+  opacity: 0.9;
 }

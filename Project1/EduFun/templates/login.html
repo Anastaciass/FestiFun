@@ -9,23 +9,26 @@
     <link rel="stylesheet" href="..\static\css\login&signup.css">
     <title>Login</title>
 </head>
-<body>
-    <div class="container my-5">
-        <h1 class="title">Festifun</h1>
-        <form action="/login" method="POST">
-            <div class="mb-3">
-                <label for="username" class="form-label">Enter the Username</label>
-                <input id="username" name="username" type="text" class="form-control" placeholder="Enter your username">
-            </div>
-            <div class="mb-3">
-                <label for="password" class="form-label">Enter Password</label>
-                <input id="password" name="password" type="password" class="form-control" placeholder="Enter your Password">
-            </div>
-            <div class="d-flex justify-content-between">
-                <button type="submit" class="btn btn-outline-dark">Login</button>
-                <a href="/signup" class="btn btn-outline-dark">Register</a>
-            </div>
-        </form>
+<div class="full-wrapper">
+    <div class="top-section">
+      <h1 class="title">FestiFun</h1>
     </div>
+    <div class="form-container">
+      <h2 class="form-title">LOG IN TO YOUR ACCOUNT</h2>
+      <p class="form-subtitle">FILL THE FORMS BELOW</p>
+      <form action="/login" method="POST">
+        <div class="form-group">
+          <input id="username" name="username" type="text" class="form-control" placeholder="USERNAME" required />
+        </div>
+        <div class="form-group">
+          <input id="password" name="password" type="password" class="form-control" placeholder="PASSWORD" required />
+        </div>
+        <div class="button-column">
+            <button type="submit" class="btn btn-gradient">Login</button>
+            <a href="/signup" class="btn btn-gradient">Register</a>
+        </div>
+      </form>
+    </div>
+  </div>
 </body>
 </html>

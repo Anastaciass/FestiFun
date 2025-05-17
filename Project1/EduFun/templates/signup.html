@@ -10,31 +10,33 @@
     <title>Register</title>
 </head>
 <body>
-    
-    <div class="container my-5">
-        <h1 class="title">Festifun</h1>
-        <form action="/signup" method="POST">
-            <div class="mb-3">
-                <label for="username" class="form-label">Enter the Username</label>
-                <input id="username" name="username" type="text" class="form-control" placeholder="Enter your username">
-            </div>
-            <div class="mb-3">
-                <label for="email" class="form-label">Enter Email</label>
-                <input id="email" name="email" type="email" class="form-control" placeholder="Enter your Email">
-            </div>
-            <div class="mb-3">
-                <label for="password1" class="form-label">Enter Password</label>
-                <input id="password1" name="password1" type="password" class="form-control" placeholder="Enter your Password">
-            </div>
-            <div class="mb-3">
-                <label for="password2" class="form-label">Enter Password Again</label>
-                <input id="password2" name="password2" type="password" class="form-control" placeholder="Enter your Password">
-            </div>
-            <div class="d-flex justify-content-between">
-                <a href="/login" class="btn btn-outline-dark">Login</a>
-                <button type="submit" class="btn btn-outline-dark">Register</button>
-            </div>
-        </form>
+  <body>
+  <div class="full-wrapper">
+    <div class="top-section">
+      <h1 class="title">FestiFun</h1>
     </div>
+    <div class="form-container">
+      <h2 class="form-title">CREATE YOUR ACCOUNT</h2>
+      <p class="form-subtitle">ENTER YOUR DETAILS BELOW</p>
+      <form action="/signup" method="POST">
+        <div class="form-group">
+          <input id="username" name="username" type="text" class="form-control" placeholder="USERNAME" required />
+        </div>
+        <div class="form-group">
+          <input id="email" name="email" type="email" class="form-control" placeholder="E-MAIL" required />
+        </div>
+        <div class="form-group">
+          <input id="password1" name="password1" type="password" class="form-control" placeholder="PASSWORD" required />
+        </div>
+        <div class="form-group">
+          <input id="password2" name="password2" type="password" class="form-control" placeholder="CONFIRM PASSWORD" required />
+        </div>
+        <div class="button-column">
+          <a href="/login" class="btn btn-gradient">Login</a>
+          <button type="submit" class="btn btn-gradient">Signup</button>
+        </div>
+      </form>
+    </div>
+  </div>
 </body>
 </html>
