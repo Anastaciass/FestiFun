@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Main page (Users)</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      background-color: black;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      position: relative;
+    }
+
+    #map {
+      width: 375px; 
+      height: 667px; 
+      border-radius: 15px; 
+      position: relative;
+    }
+
+    .settings {
+      position: absolute;
+      top: 37px;
+      right: 560px; 
+      background-color: #BE58CF;
+      color: rgb(255, 255, 255);
+      border-radius: 5px; 
+      border-top-left-radius: 0px;
+      border-bottom-right-radius: 0px;
+      padding: 10px;
+      width: 60px; 
+      height: 60px; 
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      z-index: 1001;
+      cursor: pointer;
+      border: none; 
+    }
+
+    .settings a {
+      text-decoration: none; 
+      color: #ffffff; 
+      font-size: 40px; 
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+    }
+
+    .search-container {
+      position: absolute;
+      bottom: 40px;
+      width: 90%; 
+      max-width: 340px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      z-index: 1001;
+    }
+
+    .search-bar {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      color: rgb(0, 0, 0);
+      background-color: #BE58CF;
+      border-radius: 20px;
+      padding: 10px;
+      font-family: Arial, Helvetica, sans-serif;
+      cursor: pointer;
+    }
+
+    .search-bar i {
+      color: #ffffff;
+      margin-right: 10px;
+      font-size: 20px;
+    }
+
+    .search-bar input {
+      flex: 1;
+      border: none;
+      outline: none;
+      padding: 10px;
+      font-size: 16px;
+      background-color: transparent;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    .search-bar input::placeholder {
+      color: #ffffff;
+    }
+
+    .filter-list {
+      width: 105.5%;
+      position: absolute;
+      right: -9px;
+      top: -103px; 
+      background-color: #BE58CF;
+      border-top-right-radius: 10px;
+      border-top-left-radius: 10px;
+      border-bottom-right-radius: 0px;
+      border-bottom-left-radius: 0px;
+      overflow: hidden;
+      max-height: 150px;
+      overflow-y: auto;
+      z-index: 1001;
+      display: none;
+    }
+
+    .filter-list div {
+      padding: 10px;
+      cursor: pointer;
+      border-bottom: 1px solid #ffffff;
+      color: rgb(255, 255, 255);
+    }
+
+    .filter-list div:last-child {
+      border-bottom: none;
+    }
+
+    .filter-list div:hover {
+      background-color: #ff3db5;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+
+
+  <div class="settings">
+    <a href="settings.html">⚙</a>
+  </div>
+
+
+  <div class="search-container">
+    <div class="filter-list" id="filter-list">
+    </div>
+    <div class="search-bar" id="search-bar">
+      <i class="fas fa-search"></i>
+      <input type="text" id="search-input" placeholder="Search...">
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="script.js"></script>
+
+</body>
+</html>
