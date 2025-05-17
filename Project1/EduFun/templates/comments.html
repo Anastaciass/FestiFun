@@ -12,15 +12,15 @@
 
 <body>
 
-    <br>
+    <div id="comments">
 
-    <p class="enter3">This festival was great!</p>
-    <p class="enter3">I had so much fun!</p>
-    <p class="enter3">When is there another festival?</p>
+</div>
 
-    <br>
-
-    <p class="enter3">Leave a comment here...</p>
+<form id="comment-form">
+    <input type="text" id="comment-input" placeholder="Leave a comment here..." />
+    <input type="number" id="rating" placeholder="Rating (0–5)" oninput="validateRating(this)" />
+    <button type="button" id="submit-button" onclick="submitComment()">Send</button>
+</form>
 
 </body>
 

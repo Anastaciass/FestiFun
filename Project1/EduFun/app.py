@@ -3,7 +3,7 @@ from flask_cors import CORS
 from werkzeug.utils import secure_filename
 from sqlalchemy import create_engine, func
 from sqlalchemy.orm import sessionmaker
-from main import Event, User, Comment, Rating, Session
+from db_controller import Event, User, Comment, Rating, Session, session
 import os
 
 app = Flask(__name__)
@@ -69,12 +69,6 @@ def home():
 def organizer():
     return render_template('mainorg.html')
 
-
-# --- Подключение базы данных и заполнение ---
-db_url = os.getenv('DATABASE_URL', 'sqlite:///orm.db')
-engine = create_engine(db_url)
-Session = sessionmaker(bind=engine)
-session = Session()
 
 def seed_database():
     user = User(
@@ -219,6 +213,15 @@ def mainuser():
 @app.route('/settings')
 def settings():
     return render_template('settings.html')
+
+@app.route('/mainorg')
+def mainorg():
+    return render_template('mainorg.html')
+
+@app.route('/guestlist')
+def guestlist():
+    return render_template('guestlist.html')
+
 
 
 if __name__ == '__main__':
