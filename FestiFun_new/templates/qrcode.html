@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+        }
+        button {
+            background-color:rgb(98, 0, 117);
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 20px 0;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        button:hover {
+            background-color:rgb(98, 0, 117);
+        }
+        #qrCode {
+            margin-top: 20px;
+            display: none;
+        }
+        #qrCode img {
+            max-width: 300px;
+            border: 1px solid #ddd;
+            padding: 10px;
+        }
+        #userIdDisplay {
+            margin-top: 10px;
+            font-weight: bold;
+            display: none;
+        }
+        .nav-link {
+            display: block;
+            margin-top: 30px;
+            color:rgb(74, 0, 104);
+            text-decoration: none;
+        }
+        .nav-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>QR Code Generator</h1>
+    <p>Click the button below to generate a unique QR code and add yourself to the database</p>
+    
+    <button id="generateBtn">Generate QR Code</button>
+    
+    <div id="qrCode">
+        <img id="qrCodeImage" src="" alt="QR Code">
+    </div>
+    
+    <div id="userIdDisplay"></div>
+    
+    <a href="/users" class="nav-link">View All Users</a>
+    
+    <script>
+        document.getElementById('generateBtn').addEventListener('click', function() {
+            fetch('/generate_qr')
+                .then(response => response.json())
+                .then(data => {
+                    // Display QR code
+                    document.getElementById('qrCodeImage').src = 'data:image/png;base64,' + data.qr_code;
+                    document.getElementById('qrCode').style.display = 'block';
+                    
+                    // Display UUID
+                    document.getElementById('userIdDisplay').innerText = 'Your ID: ' + data.uuid;
+                    document.getElementById('userIdDisplay').style.display = 'block';
+                })
+                .catch(error => {
+                    console.error('Error generating QR code:', error);
+                    alert('Error generating QR code. Please try again.');
+                });
+        });
+    </script>
+</body>
+</html>
