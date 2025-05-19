@@ -1,68 +1,86 @@
-const map = L.map('map').setView([51.505, -0.09], 13); 
+let lastLat = null;
+let lastLng = null;
 
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-}).addTo(map);
+document.addEventListener('DOMContentLoaded', function () {
+  const map = L.map('map').setView([51.4416, 5.4697], 12);
 
-document.addEventListener("DOMContentLoaded", () => {
-  const searchBar = document.getElementById("search-bar");
-  const searchInput = document.getElementById("search-input");
-  const filterList = document.getElementById("filter-list");
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap contributors'
+  }).addTo(map);
 
-  function populateFilterList(data) {
-    filterList.innerHTML = ""; 
-    data.forEach(item => {
-      const div = document.createElement("div");
-      div.textContent = item;
-      div.addEventListener("click", () => {
-        searchInput.value = item; 
-        filterList.style.display = "none"; 
-      });
-      filterList.appendChild(div);
+  fetch("/get_events")
+  .then(res => res.json())
+  .then(events => {
+    events.forEach(evt => {
+      const popupContent = `
+        <div style="max-width: 200px;">
+          <strong>${evt.topic || 'without topic'}</strong><br>
+          <em>${evt.description || 'no description'}</em><br>
+          <span> amount in $: ${evt.price || 'free'}</span><br>
+          ${evt.webpage ? `<a href="${evt.webpage}" target="_blank">webpage</a><br>` : ''}
+          ${evt.image ? `<img src="${evt.image}" alt="Image" style="width: 100%; margin-top: 5px; border-radius: 8px;">` : ''}
+        </div>
+      `;
+      L.marker([parseFloat(evt.lat), parseFloat(evt.lng)])
+        .addTo(map)
+        .bindPopup(popupContent);
+    });
+  });
+
+  let pinPlaced = false;
+  const modal = document.getElementById('eventModal');
+  const addPinBtn = document.getElementById('addPinBtn');
+
+  map.on('click', function (e) {
+    if (!pinPlaced) {
+      L.marker(e.latlng).addTo(map);
+      lastLat = e.latlng.lat;
+      lastLng = e.latlng.lng;
+      pinPlaced = true;
+    }
+  });
+
+  addPinBtn.addEventListener('click', () => {
+    if (pinPlaced && modal) {
+      modal.classList.remove('hidden');
+    }
+  });
+
+  if (modal) {
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.add('hidden');
+      }
     });
   }
 
-  function fetchAndUpdateTopics() {
-    fetch('http://127.0.0.1:5000/api/topics')
-      .then(response => response.json())
-      .then(topics => {
-        populateFilterList(topics); 
+  const form = document.getElementById("eventForm");
+  if (form) {
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      if (!lastLat || !lastLng) {
+        alert("Click on map to add an event!");
+        return;
+      }
+
+      const formData = new FormData(form);
+      formData.append("lat", lastLat);
+      formData.append("lng", lastLng);
+
+      fetch("/save_event", {
+        method: "POST",
+        body: formData
       })
-      .catch(error => {
-        console.error("Error fetching topics:", error);
-      });
+        .then(res => res.json())
+        .then(data => {
+          alert("Saved!");
+          form.reset();
+          modal.classList.add("hidden");
+          pinPlaced = false;
+        });
+    });
+  } else {
+    console.warn("Form with ID 'eventForm' not found!");
   }
-
-  fetchAndUpdateTopics();
-
-  setInterval(fetchAndUpdateTopics, 10000);
-
-  searchBar.addEventListener("click", () => {
-    if (filterList.style.display === "none" || filterList.style.display === "") {
-      filterList.style.display = "block"; 
-    } else {
-      filterList.style.display = "none"; 
-    }
-  });
-
-
-  document.addEventListener("click", (event) => {
-    if (!searchBar.contains(event.target) && !filterList.contains(event.target)) {
-      filterList.style.display = "none";
-    }
-  });
-
-
-  searchInput.addEventListener("input", () => {
-    const query = searchInput.value.toLowerCase();
-    fetch('http://127.0.0.1:5000/api/topics')
-      .then(response => response.json())
-      .then(topics => {
-        const filteredData = topics.filter(item => item.toLowerCase().includes(query));
-        populateFilterList(filteredData);
-      })
-      .catch(error => {
-        console.error("Error fetching topics for filtering:", error);
-      });
-  });
 });
