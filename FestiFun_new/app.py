@@ -580,6 +580,31 @@ def get_events_by_topic():
     ]
 
     return jsonify(event_list)
+    
+    @app.route('/comments.html')
+def comments_page():
+    """Serve the comments HTML page."""
+    return render_template('comments.html')
+
+# Keep the existing API endpoint for getting comments data
+@app.route('/comments', methods=['GET'])
+def get_comments():
+    comments = session.query(Comment, Rating, User).join(
+        Rating, Comment.Event_ID == Rating.Event_ID
+    ).join(
+        User, Comment.User_ID == User.User_ID
+    ).all()
+
+    comment_data = [
+        {
+            "username": user.Gmail.split('@')[0],  
+            "rating": rating.Rating_value,
+            "comment": comment.Comment_text,
+        }
+        for comment, rating, user in comments
+    ]
+
+    return jsonify({"status": "success", "data": comment_data})
 
 # Comment management routes
 @app.route('/comments', methods=['GET'])
