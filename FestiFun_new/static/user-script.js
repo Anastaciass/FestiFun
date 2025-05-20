@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }).addTo(map);
   
   // Load existing events
-  fetch("/get_events")
+fetch("/get_events")
   .then(res => res.json())
   .then(events => {
     events.forEach(evt => {
@@ -18,6 +18,10 @@ document.addEventListener('DOMContentLoaded', function () {
           <span> amount in $: ${evt.price || 'free'}</span><br>
           ${evt.webpage ? `<a href="${evt.webpage}" target="_blank">webpage</a><br>` : ''}
           ${evt.image ? `<img src="${evt.image}" alt="Image" style="width: 100%; margin-top: 5px; border-radius: 8px;">` : ''}
+          <br>
+          <a href="qrcode">
+            <button style="margin-top: 8px; padding: 5px 10px; border-radius: 8px;">Buy Ticket</button>
+          </a>
         </div>
       `;
       L.marker([parseFloat(evt.lat), parseFloat(evt.lng)])
@@ -25,5 +29,4 @@ document.addEventListener('DOMContentLoaded', function () {
         .bindPopup(popupContent);
     });
   });
-  
 });
