@@ -8,49 +8,44 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/mainorg.css') }}">
 </head>
 <body>
-
     <div class="top-bar">
         <button id="addPinBtn">+</button>
         <button id="peopleListBtn" onclick="location.href='{{ url_for('guestlist') }}'">LIST OF PEOPLE</button>
     </div>
-
     <div id="map"></div>
 
-    <!-- Search -->
     <div class="search-bar">
         <input type="text" placeholder="Search...">
     </div>
 
-    <!-- Modal -->
     <div id="eventModal" class="modal hidden">
         <form class="modal-content" id="eventForm" enctype="multipart/form-data">
             <label>PLACE</label>
             <input type="text" name="place">
-
+            
             <label>DATE</label>
             <input type="date" name="date">
-
+            
             <label>WEBPAGE</label>
             <input type="url" name="webpage">
-
+            
             <label>DESCRIPTION</label>
             <textarea name="description" rows="4"></textarea>
-
+            
             <label>TOPIC</label>
             <input type="text" name="topic">
-
+            
             <label>PRICE</label>
             <input type="number" name="price" step="0.01">
-
+            
+            <button type="button" onclick="location.href='comments.html'">COMMENTS</button>
+            
             <label for="image-upload" class="custom-file-upload">CHOOSE IMAGE</label>
             <input id="image-upload" type="file" name="image" accept="image/*" style="display: none;">
-
-
-
+            
             <button type="submit">SAVE</button>
         </form>
     </div>
-
     <!-- Scripts -->
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="{{ url_for('static', filename='script.js') }}"></script>
