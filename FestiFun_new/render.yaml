@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: festifun-app
+    runtime: python
+    buildCommand: ""
+    startCommand: gunicorn app:app
+    envVars:
+      - key: FLASK_ENV
+        value: production
+    region: frankfurt
