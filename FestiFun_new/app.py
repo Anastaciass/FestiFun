@@ -36,7 +36,7 @@ app = Flask(__name__)
 CORS(app)
 
 # Set a secret key for the application
-app.secret_key = ''.join(random.choices(string.ascii_letters + string.digits, k=32))
+app.secret_key = "dev"
 
 # Define the path to the templates
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -245,7 +245,7 @@ def login_post():
         
         # Store user information in session
         flask_session['user_id'] = user.User_ID
-        flask_session['user_type'] = user.User_Type
+        # flask_session['user_type'] = user.User_Type
         
         # Login successful - return user type for redirection
         return jsonify({
@@ -382,6 +382,7 @@ def complete_registration():
 # Main pages routes
 @app.route('/mainuser')
 def mainuser():
+    print("user", flask_session.get('user'))
     return render_template('mainuser.html')
 
 @app.route('/settings')
@@ -581,30 +582,30 @@ def get_events_by_topic():
 
     return jsonify(event_list)
     
-    @app.route('/comments.html')
-def comments_page():
-    """Serve the comments HTML page."""
-    return render_template('comments.html')
+# @app.route('/comments')
+# def comments_page():
+#     """Serve the comments HTML page."""
+#     return render_template('comments.html')
 
 # Keep the existing API endpoint for getting comments data
-@app.route('/comments', methods=['GET'])
-def get_comments():
-    comments = session.query(Comment, Rating, User).join(
-        Rating, Comment.Event_ID == Rating.Event_ID
-    ).join(
-        User, Comment.User_ID == User.User_ID
-    ).all()
+# @app.route('/comments', methods=['GET'])
+# def get_comments():
+#     comments = session.query(Comment, Rating, User).join(
+#         Rating, Comment.Event_ID == Rating.Event_ID
+#     ).join(
+#         User, Comment.User_ID == User.User_ID
+#     ).all()
 
-    comment_data = [
-        {
-            "username": user.Gmail.split('@')[0],  
-            "rating": rating.Rating_value,
-            "comment": comment.Comment_text,
-        }
-        for comment, rating, user in comments
-    ]
+#     comment_data = [
+#         {
+#             "username": user.Gmail.split('@')[0],  
+#             "rating": rating.Rating_value,
+#             "comment": comment.Comment_text,
+#         }
+#         for comment, rating, user in comments
+#     ]
 
-    return jsonify({"status": "success", "data": comment_data})
+#     return jsonify({"status": "success", "data": comment_data})
 
 # Comment management routes
 @app.route('/comments', methods=['GET'])
